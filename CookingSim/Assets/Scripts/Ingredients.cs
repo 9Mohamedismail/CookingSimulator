@@ -7,12 +7,12 @@ public class Ingredients : MonoBehaviour
     [SerializeField] private TMP_Text[] textBoxes;
     [SerializeField] private string[] ingredients;
 
-    private string[] randomizedArray;
+    public string[] randomizedArray;
 
     private void Start()
     {
-        // Check if the number of available text boxes is less than the length of the ingredients array
-        if (textBoxes.Length < ingredients.Length)
+        // Check if the number of available text boxes is less than 5
+        if (textBoxes.Length < 5)
         {
             Debug.LogError("Insufficient number of UI TextBoxes!");
             return;
@@ -22,12 +22,13 @@ public class Ingredients : MonoBehaviour
         string[] randomizedIngredients = (string[])ingredients.Clone();
 
         // Randomly assign text to the text boxes from the randomized ingredients array
-        randomizedArray = new string[ingredients.Length];
-        for (int i = 0; i < ingredients.Length; i++)
+        randomizedArray = new string[5]; // Only 5 elements in the randomized array
+        for (int i = 0; i < 5; i++)
         {
             int randomIndex = Random.Range(0, randomizedIngredients.Length);
-            textBoxes[i].text = randomizedIngredients[randomIndex];
 
+            // Assign the ingredient to the text box
+            textBoxes[i].text = randomizedIngredients[randomIndex];
             randomizedArray[i] = randomizedIngredients[randomIndex];
 
             // Remove the used ingredient from the randomized ingredients array to avoid duplicates
